@@ -1,0 +1,46 @@
+# ============================================
+# 验证 Frontmatter 工作流
+# ============================================
+# 功能：在 PR 时自动验证所有 SKILL.md 的 frontmatter 格式是否正确
+# 触发条件：当 agents/*.md 或 skills/*/SKILL.md 或 commands/*.md 文件发生变化时
+
+name: Validate Frontmatter
+
+on:
+  pull_request:
+    paths:
+      - '**/agents/*.md'
+      - '**/skills/*/SKILL.md'
+      - '**/commands/*.md'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      # 检出代码
+      - uses: actions/checkout@v4
+
+      # 设置 Bun 运行时环境
+      - uses: oven-sh/setup-bun@v2
+
+      # 安装依赖
+      - name: Install dependencies
+        run: cd .github/scripts && bun install yaml
+
+      # 获取发生变化的 frontmatter 文件
+      # 使用 diff-filter=AMRC 排除已删除文件（D）- 仅检查新增、修改、重命名、复制的文件
+      - name: Get changed frontmatter files
+        id: changed
+        run: |
+          FILES=$(gh pr diff ${{ github.event.pull_request.number }} --name-only --diff-filter=AMRC | grep -E '(agents/.*\.md|skills/.*/SKILL\.md|commands/.*\.md)$' || true)
+          echo "files<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$FILES" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      # 验证 frontmatter 格式
+      - name: Validate frontmatter
+        if: steps.changed.outputs.files != ''
+        run: |
+          echo "${{ steps.changed.outputs.files }}" | xargs bun .github/scripts/validate-frontmatter.ts

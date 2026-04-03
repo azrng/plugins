@@ -1,0 +1,31 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "my-plugins",
+  "description": "个人 Claude 插件市场，包含前端设计和天气顾问等实用插件",
+  "owner": {
+    "name": "azrng",
+    "email": "user@example.com"
+  },
+  "plugins": [
+    {
+      "name": "frontend-design",
+      "description": "创建高质量的前端界面设计。生成独特、精致的前端代码和UI设计，避免通用的AI美学。",
+      "author": {
+        "name": "Anthropic",
+        "email": "support@anthropic.com"
+      },
+      "source": "./plugins/frontend-design",
+      "category": "development"
+    },
+    {
+      "name": "weather-advisor",
+      "description": "智能天气顾问。实时天气查询、未来7天预报、穿衣建议与出行活动推荐",
+      "author": {
+        "name": "azrng",
+        "email": "user@example.com"
+      },
+      "source": "./plugins/weather-advisor",
+      "category": "productivity"
+    }
+  ]
+}

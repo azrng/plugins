@@ -1,0 +1,8 @@
+{
+  "name": "weather-advisor",
+  "description": "智能天气顾问。实时天气查询、未来7天预报、穿衣建议与出行活动推荐",
+  "author": {
+    "name": "azrng",
+    "email": "user@example.com"
+  }
+}

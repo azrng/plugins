@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p skills)",
+      "Bash(cp -r \"C:/Work/gitee/ai-code-rule/skills/frontend-design\" skills/)",
+      "Bash(cp -r \"C:/Work/gitee/ai-code-rule/skills/weather-advisor\" skills/)",
+      "Bash(cp -r \"C:/Work/gitee/ai-code-rule/skills/frontend-design\" store/)",
+      "Bash(cp -r \"C:/Work/gitee/ai-code-rule/skills/weather-advisor\" store/)",
+      "Bash(cp \"C:/Work/gitee/ai-code-rule/skills/frontend-design/SKILL.md\" plugins/frontend-design/skills/)",
+      "Bash(cp \"C:/Work/gitee/ai-code-rule/skills/frontend-design/LICENSE.txt\" plugins/frontend-design/)",
+      "Bash(cp \"C:/Work/gitee/ai-code-rule/skills/weather-advisor/SKILL.md\" plugins/weather-advisor/skills/)",
+      "Bash(cp -r \"C:/Work/gitee/ai-code-rule/skills/weather-advisor/scripts\" plugins/weather-advisor/)",
+      "Bash(cp -r \"C:/Work/gitee/ai-code-rule/skills/weather-advisor/references\" plugins/weather-advisor/)",
+      "Bash(cp -r \"C:/Work/gitee/ai-code-rule/skills/weather-advisor/data\" plugins/weather-advisor/)"
+    ]
+  }
+}

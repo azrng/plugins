@@ -1,0 +1,31 @@
+# ============================================
+# 验证 Marketplace JSON 工作流
+# ============================================
+# 功能：验证 marketplace.json 格式是否正确，检查插件是否按字母排序
+# 触发条件：当 .claude-plugin/marketplace.json 文件发生变化时
+
+name: Validate Marketplace JSON
+
+on:
+  pull_request:
+    paths:
+      - '.claude-plugin/marketplace.json'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      # 检出代码
+      - uses: actions/checkout@v4
+
+      # 设置 Bun 运行时环境
+      - uses: oven-sh/setup-bun@v2
+
+      # 验证 marketplace.json 格式
+      # 检查：JSON 格式是否正确、plugins 数组是否存在、必填字段是否完整、是否有重复的插件名
+      - name: Validate marketplace.json
+        run: bun .github/scripts/validate-marketplace.ts .claude-plugin/marketplace.json
+
+      # 检查插件是否按字母顺序排序
+      - name: Check plugins sorted
+        run: bun .github/scripts/check-marketplace-sorted.ts
