@@ -1,0 +1,8 @@
+{
+  "name": "console-di",
+  "description": "Azrng.ConsoleApp.DependencyInjection 控制台依赖注入框架开发指南。提供 .NET 控制台应用中依赖注入、配置管理、日志记录的最佳实践与代码模板。",
+  "author": {
+    "name": "azrng",
+    "email": ""
+  }
+}

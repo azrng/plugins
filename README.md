@@ -21,6 +21,7 @@
 | weather-advisor | 自建/第三方 | 智能天气顾问，提供天气查询和穿衣建议 |
 | bootstrap-blazor | 自建 | BootstrapBlazor 组件库开发指南 |
 | common-efcore | 自建 | Common.EFCore 库开发指南，Repository/UnitOfWork 模式 |
+| console-di | 自建 | 控制台依赖注入框架，支持配置/日志/AOT |
 
 ## 可用插件
 
@@ -35,6 +36,9 @@ BootstrapBlazor 组件库开发指南。提供 .NET Blazor 项目中使用 Boots
 
 ### common-efcore
 Common.EFCore 库开发指南。提供 .NET 项目中使用 Common.EFCore 封装 EF Core 的最佳实践，涵盖 Repository 模式、UnitOfWork、实体基类、多数据库提供者（MySQL/PostgreSQL/SQLite/SQLServer/InMemory）配置与使用。
+
+### console-di
+控制台依赖注入框架。为 .NET 控制台应用提供类似 ASP.NET Core 的依赖注入体验，支持 appsettings.json 配置、多日志输出（Console/Debug/文件）、环境配置和 Native AOT 编译。
 
 ## 安装方式
 
@@ -72,7 +76,12 @@ azrng-plugins/
 │   │   │   └── plugin.json
 │   │   └── skills/
 │   │       └── SKILL.md
-│   └── common-efcore/
+│   ├── common-efcore/
+│   │   ├── .claude-plugin/
+│   │   │   └── plugin.json
+│   │   └── skills/
+│   │       └── SKILL.md
+│   └── console-di/
 │       ├── .claude-plugin/
 │       │   └── plugin.json
 │       └── skills/
