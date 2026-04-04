@@ -1,0 +1,8 @@
+{
+  "name": "bootstrap-blazor",
+  "description": "BootstrapBlazor 组件库开发指南。提供 .NET Blazor 项目中使用 BootstrapBlazor 组件的最佳实践、代码模板和常见模式，涵盖 Table、Modal、Form、TreeView、Toast 等核心组件。",
+  "author": {
+    "name": "azrng",
+    "email": ""
+  }
+}

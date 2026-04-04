@@ -1,10 +1,10 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "my-plugins",
-  "description": "个人 Claude 插件市场，包含前端设计和天气顾问等实用插件",
+  "name": "Azrng Claude 插件学习市场",
+  "description": "Azrng Claude 插件学习市场",
   "owner": {
     "name": "azrng",
-    "email": "user@example.com"
+    "email": "azrng@nb.com"
   },
   "plugins": [
     {
