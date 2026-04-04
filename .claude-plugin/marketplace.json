@@ -1,6 +1,6 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "Azrng Claude 插件学习市场",
+  "name": "azrng-plugins",
   "description": "Azrng Claude 插件学习市场",
   "owner": {
     "name": "azrng",

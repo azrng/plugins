@@ -19,6 +19,8 @@
 | 插件名 | 来源 | 说明 |
 |--------|------|------|
 | weather-advisor | 自建/第三方 | 智能天气顾问，提供天气查询和穿衣建议 |
+| bootstrap-blazor | 自建 | BootstrapBlazor 组件库开发指南 |
+| common-efcore | 自建 | Common.EFCore 库开发指南，Repository/UnitOfWork 模式 |
 
 ## 可用插件
 
@@ -28,22 +30,28 @@
 ### weather-advisor
 智能天气顾问。实时天气查询、未来7天预报、穿衣建议与出行活动推荐。
 
+### bootstrap-blazor
+BootstrapBlazor 组件库开发指南。提供 .NET Blazor 项目中使用 BootstrapBlazor 的最佳实践、代码模板和常见模式。
+
+### common-efcore
+Common.EFCore 库开发指南。提供 .NET 项目中使用 Common.EFCore 封装 EF Core 的最佳实践，涵盖 Repository 模式、UnitOfWork、实体基类、多数据库提供者（MySQL/PostgreSQL/SQLite/SQLServer/InMemory）配置与使用。
+
 ## 安装方式
 
 将此目录复制或链接到：
 ```
-C:\Users\用户名\.claude\plugins\marketplaces\my-plugins
+C:\Users\用户名\.claude\plugins\marketplaces\azrng-plugins
 ```
 
 或通过 git clone：
 ```bash
-git clone <your-repo-url> C:\Users\用户名\.claude\plugins\marketplaces\my-plugins
+git clone <your-repo-url> C:\Users\用户名\.claude\plugins\marketplaces\azrng-plugins
 ```
 
 ## 结构
 
 ```
-my-plugins/
+azrng-plugins/
 ├── .claude-plugin/
 │   └── marketplace.json    # 市场配置
 ├── plugins/                # 插件目录
@@ -52,12 +60,22 @@ my-plugins/
 │   │   │   └── plugin.json
 │   │   └── skills/
 │   │       └── SKILL.md
-│   └── weather-advisor/
+│   ├── weather-advisor/
+│   │   ├── .claude-plugin/
+│   │   │   └── plugin.json
+│   │   ├── skills/
+│   │   │   └── SKILL.md
+│   │   ├── scripts/
+│   │   └── data/
+│   ├── bootstrap-blazor/
+│   │   ├── .claude-plugin/
+│   │   │   └── plugin.json
+│   │   └── skills/
+│   │       └── SKILL.md
+│   └── common-efcore/
 │       ├── .claude-plugin/
 │       │   └── plugin.json
-│       ├── skills/
-│       │   └── SKILL.md
-│       ├── scripts/
-│       └── data/
+│       └── skills/
+│           └── SKILL.md
 └── README.md
 ```

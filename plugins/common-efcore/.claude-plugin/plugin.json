@@ -1,0 +1,8 @@
+{
+  "name": "common-efcore",
+  "description": "Common.EFCore NuGet 库开发指南。提供 .NET 项目中使用 Common.EFCore 的最佳实践，涵盖 Repository 模式、UnitOfWork、实体基类、多数据库提供者（MySQL/PostgreSQL/SQLite/SQLServer/InMemory）的配置与使用。",
+  "author": {
+    "name": "azrng",
+    "email": ""
+  }
+}
