@@ -26,6 +26,16 @@
       },
       "source": "./plugins/weather-advisor",
       "category": "productivity"
+    },
+    {
+      "name": "claude-weixin",
+      "description": "仿 openclaw-weixin 的 Claude 微信桥接插件骨架，提供扫码登录、长轮询拉消息、发送消息、typing 和上传参数申请。",
+      "author": {
+        "name": "azrng",
+        "email": "user@example.com"
+      },
+      "source": "./plugins/claude-weixin",
+      "category": "productivity"
     }
   ]
 }

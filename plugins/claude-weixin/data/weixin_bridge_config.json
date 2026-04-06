@@ -1,0 +1,12 @@
+{
+  "base_url": "http://127.0.0.1:3000",
+  "api_prefix": "/v1/weixin",
+  "auth_type": "ilink_bot_token",
+  "token": "",
+  "x_wechat_uin": "",
+  "account_id": "demo-bot",
+  "bot_type": "bot",
+  "last_session_key": "",
+  "last_sync_buffer": "",
+  "last_typing_ticket": ""
+}

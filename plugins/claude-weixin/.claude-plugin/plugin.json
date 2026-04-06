@@ -1,0 +1,8 @@
+{
+  "name": "claude-weixin",
+  "description": "Claude Weixin bridge plugin modeled after openclaw-weixin. It uses a local script to talk to a QR-login HTTP JSON gateway for polling, messaging, typing, and upload preparation.",
+  "author": {
+    "name": "azrng",
+    "email": "user@example.com"
+  }
+}
