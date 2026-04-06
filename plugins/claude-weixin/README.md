@@ -321,6 +321,229 @@ Authorization: Bearer <token>
 X-WECHAT-UIN: <optional>
 ```
 
+## 真实后端返回示例 JSON
+
+下面这些示例不是固定协议标准，而是建议你的后端尽量返回成这种风格，这样可以和当前脚本更顺畅地配合。
+
+### 1. `login/start` 返回示例
+
+```json
+{
+  "ret": 0,
+  "message": "ok",
+  "session_key": "wx-login-session-001",
+  "qrcode_url": "https://example.com/qrcode/wx-login-session-001",
+  "expires_in": 120
+}
+```
+
+说明:
+
+- `session_key` 用于后续 `login-wait`
+- `qrcode_url` 或 `qr_data_url` 任意一种都可以
+- 当前脚本会自动缓存 `session_key`
+
+### 2. `login/wait` 返回示例
+
+```json
+{
+  "ret": 0,
+  "connected": true,
+  "message": "login success",
+  "account_id": "demo-bot",
+  "bot_token": "token-from-weixin-gateway",
+  "user_id": "bot@im.bot",
+  "base_url": "http://127.0.0.1:3000"
+}
+```
+
+说明:
+
+- `connected=true` 表示扫码已完成
+- `bot_token` 会被脚本自动写入本地配置
+- `account_id` 会更新本地账号标识
+
+### 3. `getupdates` 返回示例
+
+```json
+{
+  "ret": 0,
+  "errmsg": "ok",
+  "msgs": [
+    {
+      "message_id": 10001,
+      "from_user_id": "user@im.wechat",
+      "to_user_id": "bot@im.bot",
+      "create_time_ms": 1775400000000,
+      "context_token": "ctx-token-001",
+      "item_list": [
+        {
+          "type": 1,
+          "text_item": {
+            "text": "你好"
+          }
+        }
+      ]
+    }
+  ],
+  "get_updates_buf": "sync-buf-next-001",
+  "longpolling_timeout_ms": 30000
+}
+```
+
+说明:
+
+- `msgs` 是消息列表
+- `get_updates_buf` 会被脚本自动缓存到本地
+- 下次 `pull` 会默认带上新的游标
+
+### 4. `sendmessage` 返回示例
+
+```json
+{
+  "ret": 0,
+  "errmsg": "ok",
+  "message_id": "msg-20001",
+  "status": "sent"
+}
+```
+
+说明:
+
+- 推荐返回 `message_id`
+- 如果你后端已有自己的响应格式，也建议至少包含成功标识
+
+### 5. `getconfig` 返回示例
+
+```json
+{
+  "ret": 0,
+  "typing_ticket": "typing-ticket-001",
+  "nickname": "Claude Bot"
+}
+```
+
+说明:
+
+- `typing_ticket` 会被脚本自动缓存
+- 之后执行 `typing` 时，如果不传 `--typing-ticket`，会直接用缓存值
+
+### 6. `sendtyping` 返回示例
+
+```json
+{
+  "ret": 0,
+  "errmsg": "ok",
+  "status": 1
+}
+```
+
+### 7. `getuploadurl` 返回示例
+
+```json
+{
+  "ret": 0,
+  "upload_param": "encrypted-upload-param",
+  "thumb_upload_param": "encrypted-thumb-upload-param",
+  "upload_url": "https://cdn.example.com/upload"
+}
+```
+
+说明:
+
+- 当前脚本只负责申请上传参数
+- 真正上传文件到 CDN、媒体加密和消息拼装，还需要你后端或后续脚本继续实现
+
+## 如何接入 Claude 本地插件目录
+
+这里给你两种常见接法。
+
+### 方式一: 直接把整个仓库作为本地 marketplace 接入
+
+适合你现在这个项目结构，因为当前仓库已经带有:
+
+- `.claude-plugin/marketplace.json`
+- `plugins/claude-weixin`
+
+在 Windows 上可以把整个仓库放到:
+
+```text
+C:\Users\<你的用户名>\.claude\plugins\marketplaces\azrng-plugins
+```
+
+例如:
+
+```powershell
+New-Item -ItemType Directory -Force "$env:USERPROFILE\\.claude\\plugins\\marketplaces" | Out-Null
+Copy-Item -Recurse -Force "D:\\GitHub\\plugins" "$env:USERPROFILE\\.claude\\plugins\\marketplaces\\azrng-plugins"
+```
+
+如果你不想复制，也可以用目录链接:
+
+```powershell
+New-Item -ItemType Directory -Force "$env:USERPROFILE\\.claude\\plugins\\marketplaces" | Out-Null
+cmd /c mklink /D "$env:USERPROFILE\\.claude\\plugins\\marketplaces\\azrng-plugins" "D:\\GitHub\\plugins"
+```
+
+完成后，Claude 本地插件市场里就会读取这个 marketplace，其中已经包含 `claude-weixin`。
+
+### 方式二: 只把 `claude-weixin` 放进你自己的 marketplace
+
+如果你已经有自己的 marketplace 仓库，可以只拷贝下面这个目录:
+
+```text
+plugins/claude-weixin
+```
+
+放到你的 marketplace 的 `plugins/` 目录下，比如:
+
+```text
+C:\Users\<你的用户名>\.claude\plugins\marketplaces\my-marketplace\plugins\claude-weixin
+```
+
+然后在你自己的:
+
+```text
+C:\Users\<你的用户名>\.claude\plugins\marketplaces\my-marketplace\.claude-plugin\marketplace.json
+```
+
+追加一个插件条目:
+
+```json
+{
+  "name": "claude-weixin",
+  "description": "仿 openclaw-weixin 的 Claude 微信桥接插件骨架，提供扫码登录、长轮询拉消息、发送消息、typing 和上传参数申请。",
+  "author": {
+    "name": "azrng",
+    "email": "user@example.com"
+  },
+  "source": "./plugins/claude-weixin",
+  "category": "productivity"
+}
+```
+
+### 安装后建议检查
+
+1. 确认目录存在:
+
+```powershell
+Get-ChildItem "$env:USERPROFILE\\.claude\\plugins\\marketplaces"
+```
+
+2. 确认 marketplace JSON 可读且合法
+
+3. 确认插件目录存在:
+
+```powershell
+Get-ChildItem "$env:USERPROFILE\\.claude\\plugins\\marketplaces\\azrng-plugins\\plugins\\claude-weixin"
+```
+
+4. 在插件被 Claude 识别后，再执行初始化:
+
+```bash
+python plugins/claude-weixin/scripts/weixin_bridge.py init --account-id demo-bot
+```
+
 ## 常见问题
 
 ### 1. 执行 `login-wait` 提示缺少 session key
