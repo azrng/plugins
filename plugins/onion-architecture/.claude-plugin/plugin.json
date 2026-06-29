@@ -1,0 +1,8 @@
+{
+  "name": "onion-architecture",
+  "description": "Azrng 解决方案模板的洋葱/Clean 架构分层指南。覆盖 Core/IDomain/IApplication/Domain/Application/EntityFramework/Service 等层职责、依赖方向、项目结对，以及贯穿所有 AppService 的两条横切约定：全局返回包装（CustomResultPackFilter + UseGlobalException）与分页查询（GetPageRequest + WhereIfNotNullOrWhiteSpace + ToPageListAsync + GetQueryPageResult<T>）。",
+  "author": {
+    "name": "azrng",
+    "email": ""
+  }
+}

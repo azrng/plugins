@@ -1,0 +1,8 @@
+{
+  "name": "azrng-efcore",
+  "description": "Azrng Common.EFCore 系列库数据访问指南。提供 .NET 项目中使用 Common.EFCore 封装 EF Core 的最佳实践，涵盖 Repository/UnitOfWork、实体基类、多数据库提供者（PostgreSQL/MySQL/SQLite/SQLServer/InMemory）注入、SQL 脚本迁移（Azrng.SqlMigration）及 PostgreSQL timestamp 高频陷阱修复。",
+  "author": {
+    "name": "azrng",
+    "email": ""
+  }
+}
